@@ -1,0 +1,19 @@
+Web appication
+open the drive and create a empty folder open vs code from it
+now go to the terminal install packages
+npm init
+npm i dot env
+npm i express
+npm install sequelize
+npm install mqsql2
+create the file .env
+now create the Config folder
+inside it create the server.config.js file and make the port aviable write the code
+now create a folder Routes
+add index.js file in it
+create a new folder controller and make category.controller and product.controller
+npm install mysql2 and sequleize
+create a database name ecomm_db from mysql
+now create db.config.js in config folder and write in it
+now create a model folder and create category.js and products.js in it and write code
+npm i body-parser
