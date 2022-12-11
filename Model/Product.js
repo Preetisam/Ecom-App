@@ -8,6 +8,7 @@ let Products = sequelizeInstance.define(
       type: sequelize.DataTypes.BIGINT,
       primaryKey: true,
       autoIncrement: true,
+      notNull: false,
     },
     name: {
       type: sequelize.DataTypes.STRING,

@@ -1,26 +1,27 @@
 let Categories = require("./../Model/Category");
 let sequelizeInstance = require("./../config/db.config");
 
-let createTable = async () => {
-  await sequelizeInstance.sync({ froce: true });
-  console.log("Table created Successfully");
-};
-let insertCategories = async () => {
-  await Categories.bulkCreate([
-    {
-      name: "Fashion",
-    },
-    {
-      name: "Mobile",
-    },
-    {
-      name: "Electronics",
-    },
-    {
-      name: "Appiliances",
-    },
-  ]);
-};
+// let createTable = async () => {
+//   await sequelizeInstance.sync({ froce: true });
+//   console.log("Table created Successfully");
+//   insertCategories();
+// };
+// let insertCategories = async () => {
+//   await Categories.bulkCreate([
+//     {
+//       name: "Fashion",
+//     },
+//     {
+//       name: "Mobile",
+//     },
+//     {
+//       name: "Electronics",
+//     },
+//     {
+//       name: "Appiliances",
+//     },
+//   ]);
+// };
 
 let getAllCategories = async (req, res, next) => {
   let categories = await Categories.findAll();
@@ -28,12 +29,24 @@ let getAllCategories = async (req, res, next) => {
   res.write(JSON.stringify(categories));
   res.end();
 };
-let getCategoryById = async (req, res, next) => {
-  let categoryId = req.params.categoryId;
-  let categories = await Categories.findByPk(categoryId);
-  res.send(200).json(categories);
-  res.end();
+const getCategoryById = async (req, res) => {
+  const id = req.params.categoryId;
+  if (!id) {
+    res.status(400).json({
+      message: "Please enter valid id",
+    });
+  }
+  const category = await Categories.findAll({
+    where: {
+      id: id,
+    },
+  });
+  res.status(200).json({
+    message: "Success",
+    data: category,
+  });
 };
+
 let addNewCategory = async (req, res, next) => {
   try {
     // let arr;
@@ -90,7 +103,7 @@ let updateCategoryById = async (req, res, next) => {
 };
 
 //createTable();
-//insertCategories();
+
 let all = {
   getAllCategories,
   getCategoryById,
